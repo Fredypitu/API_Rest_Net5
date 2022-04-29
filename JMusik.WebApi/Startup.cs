@@ -30,7 +30,8 @@ namespace JMusik.WebApi
             services.AddScoped<IProductoRepositorio>((serviceProvider) =>
                 {
                     var context = serviceProvider.GetService<TiendaDbContext>();
-                    return new ProductoRepositorio(context);
+                    var logger = serviceProvider.GetService<ILogger<ProductoRepositorio>>();
+                    return new ProductoRepositorio(context, logger);
                 }
             );
 

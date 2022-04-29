@@ -1,6 +1,7 @@
 ﻿using JMusik.Data.Contratos;
 using JMusik.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,17 @@ namespace JMusik.Data.Repositorios
         where TDbContext : DbContext
     {
         protected readonly TDbContext _context;
-        public GenericoRepositorio(TDbContext context)
+        protected readonly ILogger<GenericoRepositorio<TEntity, TDbContext>> _logger;
+        public GenericoRepositorio(TDbContext context, ILogger<GenericoRepositorio<TEntity, TDbContext>> logger)
         {
             if (context==null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
             _context = context;
+            _logger = logger;
         }
+
         public virtual async Task<TEntity> Agregar(TEntity entity)
         {
             try
@@ -30,8 +34,9 @@ namespace JMusik.Data.Repositorios
                 await _context.SaveChangesAsync();
                 return entity;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError($"Error en {nameof(Agregar)}: {ex.Message}");
                 return null;
             }
 
@@ -44,9 +49,9 @@ namespace JMusik.Data.Repositorios
             {
                 return await _context.SaveChangesAsync() > 0 ? true : false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.LogError($"Error en {nameof(Eliminar)}: {ex.Message}");
                 throw;
             }
         }
@@ -65,10 +70,10 @@ namespace JMusik.Data.Repositorios
             {
                 return await _context.SaveChangesAsync() > 0 ? true : false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError($"Error en {nameof(Modificar)}: {ex.Message}");
+                return false;
             }
         }
 

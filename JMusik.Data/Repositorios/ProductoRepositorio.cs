@@ -1,6 +1,7 @@
 ﻿using JMusik.Data.Contratos;
 using JMusik.Models;
 using JMusik.Models.Enums;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace JMusik.Data.Repositorios
 {
     public class ProductoRepositorio : GenericoRepositorio<Producto, TiendaDbContext>, IProductoRepositorio
     {
-        public ProductoRepositorio(TiendaDbContext context) : base(context)
+        public ProductoRepositorio(TiendaDbContext context, ILogger<ProductoRepositorio> logger) : base(context, logger)
         {
      
         }
@@ -26,8 +27,9 @@ namespace JMusik.Data.Repositorios
                 await _context.SaveChangesAsync();
                 return producto;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError($"Error en {nameof(Agregar)}: {ex.Message}");
                 return null;
             }
         }
@@ -42,9 +44,9 @@ namespace JMusik.Data.Repositorios
 
                 return await _context.SaveChangesAsync() > 0 ? true : false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.LogError($"Error en {nameof(Modificar)}: {ex.Message}");
                 return false;
             }
 
