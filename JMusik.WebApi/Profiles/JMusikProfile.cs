@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JMusik.Data;
 using JMusik.Dtos;
+using JMusik.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

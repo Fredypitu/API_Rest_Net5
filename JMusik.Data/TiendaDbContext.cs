@@ -1,5 +1,6 @@
 ﻿using System;
 using JMusik.Data.Configuracion;
+using JMusik.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -56,7 +57,7 @@ namespace JMusik.Data
                     .HasForeignKey(d => d.OrdenId);
 
                 entity.HasOne(d => d.Producto)
-                    .WithMany(p => p.DetalleOrdens)
+                    .WithMany(p => p.DetallesOrden)
                     .HasForeignKey(d => d.ProductoId);
             });
 

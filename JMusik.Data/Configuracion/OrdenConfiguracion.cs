@@ -1,17 +1,12 @@
 ﻿using JMusik.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JMusik.Data.Configuracion
 {
-    public class OrdenConfiguracion : IEntityTypeConfiguration<JMusik.Models.Orden>
+    public class OrdenConfiguracion : IEntityTypeConfiguration<Orden>
     {
-        public void Configure(EntityTypeBuilder<JMusik.Models.Orden> entity)
+        public void Configure(EntityTypeBuilder<Orden> entity)
         {
             entity.ToTable("Orden", "tienda");
 

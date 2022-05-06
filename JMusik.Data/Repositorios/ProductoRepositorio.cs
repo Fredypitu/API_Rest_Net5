@@ -7,14 +7,14 @@ using JMusik.Models.Enums;
 
 namespace JMusik.Data.Repositorios
 {
-    public class ProductoRepositorio : GenericoRepositorio<JMusik.Models.Producto, TiendaDbContext>, IProductoRepositorio
+    public class ProductoRepositorio : GenericoRepositorio<Producto, TiendaDbContext>, IProductoRepositorio
     {
         public ProductoRepositorio(TiendaDbContext context, ILogger<ProductoRepositorio> logger) : base(context, logger)
         {
      
         }
 
-        public override async Task<JMusik.Models.Producto> Agregar(JMusik.Models.Producto producto)
+        public override async Task<Producto> Agregar(Producto producto)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace JMusik.Data.Repositorios
             }
         }
 
-        public override async Task<bool> Modificar(JMusik.Models.Producto producto)
+        public override async Task<bool> Modificar(Producto producto)
         {
             try
             {
