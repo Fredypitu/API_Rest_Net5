@@ -3,9 +3,6 @@ using JMusik.Models;
 using JMusik.Models.Enums;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace JMusik.Data.Repositorios
@@ -22,7 +19,7 @@ namespace JMusik.Data.Repositorios
             try
             {
                 producto.FechaRegistro = DateTime.UtcNow;
-                producto.Estatus = EstatusProducto.Activo;
+                producto.Estatus = 1;//EstatusProducto.Activo;
                 await _context.Set<Producto>().AddAsync(producto);
                 await _context.SaveChangesAsync();
                 return producto;
@@ -39,15 +36,20 @@ namespace JMusik.Data.Repositorios
             try
             {
                 var productoNuevo = await ObtenerById(producto.Id);
+                if (productoNuevo is null)
+                {
+                    return false;
+                }
                 productoNuevo.Nombre = producto.Nombre;
                 productoNuevo.Precio = producto.Precio;
 
-                return await _context.SaveChangesAsync() > 0 ? true : false;
+                await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Error en {nameof(Modificar)}: {ex.Message}");
-                return false;
+                throw;
             }
 
         }

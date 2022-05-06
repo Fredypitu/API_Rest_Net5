@@ -79,11 +79,14 @@ namespace JMusik.Data.Repositorios
 
         public virtual async Task<List<TEntity>> ObtenerAll()
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            var xxx1 = typeof(TEntity);
+            var xxx2 = await _context.Set<TEntity>().ToListAsync();
+            return xxx2;
         }
 
         public virtual async Task<TEntity> ObtenerById(int id)
         {
+            //Si no existe la Entity devuelve null
             return await _context.Set<TEntity>().FindAsync(id);
         }
     }

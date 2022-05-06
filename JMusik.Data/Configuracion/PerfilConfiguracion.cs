@@ -14,6 +14,7 @@ namespace JMusik.Data.Configuracion
         public void Configure(EntityTypeBuilder<Perfil> entity)
         {
             entity.ToTable("Perfil", "tienda");
+
             entity.Property(e => e.Nombre).HasMaxLength(50);
         }
     }

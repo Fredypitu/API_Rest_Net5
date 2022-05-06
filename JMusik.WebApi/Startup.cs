@@ -27,17 +27,31 @@ namespace JMusik.WebApi
         {
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IProductoRepositorio>((serviceProvider) =>
-                {
-                    var context = serviceProvider.GetService<TiendaDbContext>();
-                    var logger = serviceProvider.GetService<ILogger<ProductoRepositorio>>();
-                    return new ProductoRepositorio(context, logger);
-                }
-            );
 
-            services.AddDbContext<TiendaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("CString"))
-            );
+            services.AddTransient<IProductoRepositorio, ProductoRepositorio>();
+            services.AddTransient<IOrdenRepositorio, OrdenRepositorio>();
+
+            //services.AddScoped<IOrdenRepositorio>((serviceProvider) =>
+            //{
+            //    var context = serviceProvider.GetService<TiendaDbContext>();
+            //    var logger = serviceProvider.GetService<ILogger<OrdenRepositorio>>();
+            //    return new OrdenRepositorio(context, logger);
+            //});
+
+            //services.AddScoped<IProductoRepositorio>((serviceProvider) =>
+            //    {
+            //        var context = serviceProvider.GetService<TiendaDbContext>();
+            //        var logger = serviceProvider.GetService<ILogger<ProductoRepositorio>>();
+            //        return new ProductoRepositorio(context, logger);
+            //    }
+            //);    
+
+            services.AddDbContext<TiendaDbContext>((options) =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("CString"));
+
+            });
+
             services.AddControllers();
         }
 

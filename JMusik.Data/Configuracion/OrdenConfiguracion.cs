@@ -22,7 +22,7 @@ namespace JMusik.Data.Configuracion
             entity.Property(e => e.Importe).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Usuario)
-                .WithMany(p => p.Ordenes)
+                .WithMany(p => p.Ordens)
                 .HasForeignKey(d => d.UsuarioId);
         }
     }

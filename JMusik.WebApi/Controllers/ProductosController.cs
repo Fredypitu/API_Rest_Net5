@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using JMusik.Data;
 using JMusik.Data.Contratos;
 using JMusik.Dtos;
-using JMusik.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -103,13 +103,12 @@ namespace JMusik.WebApi.Controllers
         {
             try
             {
-                if (productoDto is null)
-                {
-                    return NotFound();
-                }
-                
                 var producto = _mapper.Map<Producto>(productoDto);
-                await _repo.Modificar(producto);
+                if (productoDto is null || !await _repo.Modificar(producto))
+                {
+                    _logger.LogWarning($"No existe el producto con id: {producto.Id}");
+                    return NotFound();
+                }                            
 
                 var nuevoProductoDto = _mapper.Map<ProductoDto>(producto);
 
