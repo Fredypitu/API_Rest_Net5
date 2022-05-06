@@ -1,26 +1,26 @@
 ﻿using JMusik.Data.Contratos;
-using JMusik.Models;
-using JMusik.Models.Enums;
 using Microsoft.Extensions.Logging;
 using System;
+using JMusik.Models;
 using System.Threading.Tasks;
+using JMusik.Models.Enums;
 
 namespace JMusik.Data.Repositorios
 {
-    public class ProductoRepositorio : GenericoRepositorio<Producto, TiendaDbContext>, IProductoRepositorio
+    public class ProductoRepositorio : GenericoRepositorio<JMusik.Models.Producto, TiendaDbContext>, IProductoRepositorio
     {
         public ProductoRepositorio(TiendaDbContext context, ILogger<ProductoRepositorio> logger) : base(context, logger)
         {
      
         }
 
-        public override async Task<Producto> Agregar(Producto producto)
+        public override async Task<JMusik.Models.Producto> Agregar(JMusik.Models.Producto producto)
         {
             try
             {
                 producto.FechaRegistro = DateTime.UtcNow;
-                producto.Estatus = 1;//EstatusProducto.Activo;
-                await _context.Set<Producto>().AddAsync(producto);
+                producto.Estatus = EstatusProducto.Activo;
+                await _context.Set<JMusik.Models.Producto>().AddAsync(producto);
                 await _context.SaveChangesAsync();
                 return producto;
             }
@@ -31,7 +31,7 @@ namespace JMusik.Data.Repositorios
             }
         }
 
-        public override async Task<bool> Modificar(Producto producto)
+        public override async Task<bool> Modificar(JMusik.Models.Producto producto)
         {
             try
             {

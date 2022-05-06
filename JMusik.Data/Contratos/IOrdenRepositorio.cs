@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JMusik.Data.Contratos
 {
-    public interface IOrdenRepositorio:IGenericoRepositorio<Orden>
+    public interface IOrdenRepositorio:IGenericoRepositorio<JMusik.Models.Orden>
     {
         // Aqui van los metodos que son exclusivo para ORDEN
     }

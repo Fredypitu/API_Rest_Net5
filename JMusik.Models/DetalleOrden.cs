@@ -1,4 +1,5 @@
-﻿#nullable disable
+﻿
+#nullable disable
 
 namespace JMusik.Models
 {

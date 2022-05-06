@@ -72,11 +72,11 @@ namespace JMusik.WebApi.Controllers
         // POST: api/Productos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Producto>> Post(ProductoDto productoDto)
+        public async Task<ActionResult<JMusik.Models.Producto>> Post(ProductoDto productoDto)
         {
             try
             {
-                var producto = _mapper.Map<Producto>(productoDto);
+                var producto = _mapper.Map<JMusik.Models.Producto>(productoDto);
 
                 if (await _repo.Agregar(producto) is null)
                 {
@@ -103,7 +103,7 @@ namespace JMusik.WebApi.Controllers
         {
             try
             {
-                var producto = _mapper.Map<Producto>(productoDto);
+                var producto = _mapper.Map<JMusik.Models.Producto>(productoDto);
                 if (productoDto is null || !await _repo.Modificar(producto))
                 {
                     _logger.LogWarning($"No existe el producto con id: {producto.Id}");

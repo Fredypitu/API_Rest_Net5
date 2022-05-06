@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace JMusik.Data.Configuracion
 {
-    public class OrdenConfiguracion : IEntityTypeConfiguration<Orden>
+    public class OrdenConfiguracion : IEntityTypeConfiguration<JMusik.Models.Orden>
     {
-        public void Configure(EntityTypeBuilder<Orden> entity)
+        public void Configure(EntityTypeBuilder<JMusik.Models.Orden> entity)
         {
             entity.ToTable("Orden", "tienda");
 
@@ -22,7 +22,7 @@ namespace JMusik.Data.Configuracion
             entity.Property(e => e.Importe).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Usuario)
-                .WithMany(p => p.Ordens)
+                .WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.UsuarioId);
         }
     }

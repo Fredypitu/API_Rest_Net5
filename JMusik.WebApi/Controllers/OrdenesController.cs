@@ -74,7 +74,7 @@ namespace JMusik.WebApi.Controllers
         {
             try
             {
-                var orden = _mapper.Map<Orden>(ordenDto);
+                var orden = _mapper.Map<JMusik.Models.Orden>(ordenDto);
                 if (await _repo.Agregar(orden) is null)
                 {
                     _logger.LogWarning($"No existe la orden con id: {ordenDto.Id}");

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JMusik.Data.Contratos
 {
-    public interface IProductoRepositorio:IGenericoRepositorio<Producto>
+    public interface IProductoRepositorio:IGenericoRepositorio<JMusik.Models.Producto>
     {
         // Aqui van los metodos que son exclusivo para PRODUCTO
     }
