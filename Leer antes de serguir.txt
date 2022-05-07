@@ -1,0 +1,5 @@
+06/05/22/ => fecha de redacción
+-----------------------------------------------------------------------
+Solucione el error que tenia OrdenRepositorio al realizar consultas.
+Ahora falta validar el controlador OrdenaRepositorio y luego continuar 
+los demas controller.
